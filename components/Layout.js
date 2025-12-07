@@ -1,15 +1,12 @@
-// components/Layout.js
 import Head from "next/head";
 import Link from "next/link";
 
 export default function Layout({
   children,
   title = "PT. Mandala Putra Anugerah",
-  description = "PT. Mandala Putra Anugerah adalah perusahaan berbadan hukum yang bergerak di bidang Event Organizer, Pariwisata, Hiburan, dan Pembangunan berkelanjutan di Kota Batu, Jawa Timur.",
-  path = "/" 
+  description = "PT. Mandala Putra Anugerah (MPA Corp) adalah perusahaan berbadan hukum yang bergerak di bidang Event Organizer, Pariwisata, Hiburan, dan Pembangunan berkelanjutan di Kota Batu, Jawa Timur."
 }) {
   const fullTitle = `${title} | PT. Mandala Putra Anugerah`;
-  const canonicalUrl = `https://mpacorp.biz.id${path}`;
 
   return (
     <>
@@ -18,18 +15,17 @@ export default function Layout({
         <meta name="description" content={description} />
         <meta
           name="keywords"
-          content="PT Mandala Putra Anugerah, MPA Corp, mpacorp, event organizer Batu, travel Batu, pariwisata Batu, hiburan Batu, general contractor Batu, EO Batu, Kota Batu Jawa Timur, company profile MPA"
+          content="PT Mandala Putra Anugerah, MPA Corp, mpacorp.biz.id, event organizer Batu, travel Batu, pariwisata Batu, hiburan Batu, general contractor Batu, EO Batu, Kota Batu Jawa Timur"
         />
         <meta property="og:site_name" content="PT. Mandala Putra Anugerah" />
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:url" content="https://mpacorp.biz.id/" />
+        <link rel="canonical" href="https://mpacorp.biz.id/" />
       </Head>
 
       <div className="min-h-screen flex flex-col">
-        {/* Navbar */}
         <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-30">
           <nav className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
             <Link href="/" className="flex items-center gap-2">
@@ -55,6 +51,9 @@ export default function Layout({
               <Link href="/unit-usaha" className="nav-link">
                 Unit Usaha
               </Link>
+              <Link href="/blog" className="nav-link">
+                Blog
+              </Link>
               <Link href="/kontak" className="nav-link">
                 Kontak
               </Link>
@@ -62,10 +61,8 @@ export default function Layout({
           </nav>
         </header>
 
-        {/* Main */}
         <main className="flex-1">{children}</main>
 
-        {/* Footer */}
         <footer className="border-t border-slate-800 bg-slate-950 mt-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 grid gap-8 md:grid-cols-3 text-sm">
             <div>

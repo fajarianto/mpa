@@ -1,4 +1,3 @@
-// components/ServiceCard.js
 export default function ServiceCard({ number, title, description }) {
   return (
     <article className="group p-5 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900/90 transition-colors">

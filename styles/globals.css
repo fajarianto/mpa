@@ -2,24 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global reset ringan */
 html,
 body {
   padding: 0;
   margin: 0;
 }
 
-/* Fokus aksesibilitas */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid #fbbf24; /* amber-300 */
-  outline-offset: 2px;
+body {
+  @apply bg-slate-950 text-slate-50;
 }
 
-/* Navbar link */
 .nav-link {
   @apply relative text-xs sm:text-sm text-slate-100;
 }
@@ -43,7 +35,6 @@ textarea:focus-visible {
   width: 100%;
 }
 
-/* Buttons */
 .btn-primary,
 .btn-secondary {
   @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.12em] uppercase border transition ease-out duration-150;
@@ -68,7 +59,6 @@ textarea:focus-visible {
   @apply bg-slate-900/95;
 }
 
-/* Inputs & textarea */
 .input {
   @apply w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900/80 text-slate-100 text-xs sm:text-sm;
 }
@@ -79,4 +69,8 @@ textarea:focus-visible {
 
 .input:focus {
   @apply border-amber-300 outline-none;
+}
+
+.prose-invert {
+  color: #e5e7eb;
 }

@@ -1,37 +1,63 @@
-# PT. Mandala Putra Anugerah Website
+# MPA Corp – Prototype Blog (Next.js only, tanpa WordPress)
 
-Website company profile untuk **PT. Mandala Putra Anugerah** dengan Next.js + Tailwind CSS.
+Prototype website company profile + blog sederhana untuk **PT. Mandala Putra Anugerah (MPA Corp)**:
+
+- Frontend: Next.js 14 + Tailwind CSS
+- Blog: data statis di `data/posts.js` (tanpa WordPress)
+- Cocok untuk deploy cepat di Vercel sebagai prototype
 
 ## Development
 
-1. Install dependencies:
-
-   npm install
-
-2. Jalankan development server:
-
-   npm run dev
+```bash
+npm install
+npm run dev
+```
 
 Buka `http://localhost:3000`.
 
-## Build & Production
+## Struktur Halaman
 
-   npm run build
-   npm start
+- `/` — Beranda (Hero, unit usaha, highlight 2 artikel blog)
+- `/profil` — Profil perusahaan + 3 artikel terbaru
+- `/unit-usaha` — Daftar unit usaha
+- `/kontak` — Informasi kontak & form dummy
+- `/blog` — List artikel (diambil dari `data/posts.js`)
+- `/blog/[slug]` — Halaman artikel
+
+## Menambah / Mengubah Artikel
+
+Semua konten blog ada di:
+
+```txt
+data/posts.js
+```
+
+Strukturnya:
+
+```js
+export const posts = [
+  {
+    slug: "slug-artikel",
+    title: "Judul Artikel",
+    date: "2025-01-10",
+    category: "Kategori",
+    author: "Nama Penulis",
+    excerpt: "Ringkasan singkat artikel...",
+    content: `
+      <p>Konten artikel dalam HTML sederhana...</p>
+    `
+  },
+  ...
+];
+```
+
+Tinggal tambah objek baru di array `posts`.
 
 ## Deploy ke Vercel
 
-1. Push project ini ke GitHub.
-2. Buka vercel.com, klik **New Project** → **Import Git Repository**.
-3. Pilih repo ini, framework: **Next.js**, lalu Deploy.
+1. Push ke GitHub.
+2. Di Vercel: New Project → Import repository → Framework: Next.js.
+3. Build command: `npm run build`
+4. Output: `.next` (default Vercel).
 
-
-## SEO & Google Search Console
-
-- File `public/robots.txt` sudah mengarahkan ke `https://mpacorp.biz.id/sitemap.xml`.
-- File `public/sitemap.xml` berisi daftar URL utama (beranda, profil, unit usaha, kontak).
-- Untuk menghubungkan ke Google Search Console:
-  1. Tambahkan domain `https://mpacorp.biz.id` ke Search Console.
-  2. Pilih metode verifikasi meta tag.
-  3. Ganti teks `PASTE_GOOGLE_SITE_VERIFICATION_CODE_HERE` di `pages/_document.js` dengan kode verifikasi dari Google.
-  4. Deploy ulang ke Vercel dan klik Verify di Search Console.
+Selesai, blog prototype sudah jalan sepenuhnya di Vercel tanpa backend tambahan.

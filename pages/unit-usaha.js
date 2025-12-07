@@ -1,13 +1,11 @@
-// pages/unit-usaha.js
 import Layout from "../components/Layout";
 import ServiceCard from "../components/ServiceCard";
 
 export default function UnitUsahaPage() {
   return (
     <Layout
-      path="/unit-usaha"
       title="Unit Usaha"
-      description="Daftar unit usaha PT. Mandala Putra Anugerah (MPA Corp) meliputi Build–Operate–Share, Entertainment, Materials Vendor, Travels Agency, General Contractors, dan EO & Management."
+      description="Unit usaha PT. Mandala Putra Anugerah (MPA Corp) mencakup Build–Operate–Share, Entertainment, Materials Vendor, Travels Agency, General Contractors, dan EO & Management."
     >
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <h1 className="text-2xl sm:text-3xl font-semibold mb-4">

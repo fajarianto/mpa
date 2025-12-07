@@ -1,19 +1,34 @@
-// pages/index.js
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import ServiceCard from "../components/ServiceCard";
 import Link from "next/link";
+import { getAllPosts } from "../data/posts";
 
-export default function HomePage() {
+export async function getStaticProps() {
+  const posts = getAllPosts().slice(0, 2);
+  return {
+    props: { posts }
+  };
+}
+
+function formatDate(dateString) {
+  const d = new Date(dateString);
+  return d.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+export default function HomePage({ posts }) {
   return (
     <Layout
-      path="/"
       title="Beranda"
-      description="Beranda resmi PT. Mandala Putra Anugerah (MPA Corp) – perusahaan Event Organizer, Entertainment, Travel Agency, Materials Vendor, General Contractor, dan EO Management berbasis di Kota Batu, Jawa Timur."
+      description="PT. Mandala Putra Anugerah (MPA Corp) menghadirkan layanan Event Organizer, Entertainment, Travel Agency, Materials Vendor, General Contractor, dan EO Management berbasis kolaborasi di Kota Batu, Jawa Timur."
     >
       <Hero />
 
-      {/* Unit Usaha ringkas */}
+      {/* Unit Usaha */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="flex items-center justify-between gap-4 mb-6">
           <div>
@@ -77,89 +92,65 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Profil singkat */}
+      {/* Blog highlight */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-12 md:pb-16">
-        <div className="grid gap-8 md:grid-cols-2 items-start">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-3">
-              Tentang PT. Mandala Putra Anugerah
-            </h2>
-            <p className="text-sm text-slate-300 leading-relaxed mb-3">
-              PT. Mandala Putra Anugerah adalah perusahaan berbadan hukum yang
-              lahir dari semangat untuk mengembangkan potensi pariwisata dan
-              hiburan di Indonesia, khususnya Kota Batu, Jawa Timur.
-            </p>
-            <p className="text-sm text-slate-300 leading-relaxed mb-3">
-              Dengan dukungan tim berpengalaman dan jejaring mitra yang kuat,
-              MPA hadir sebagai mitra strategis bagi pemerintah, pelaku usaha,
-              dan komunitas dalam mewujudkan event berkualitas, pengembangan
-              destinasi, serta proyek pembangunan yang berkelanjutan.
-            </p>
-            <Link
-              href="/profil"
-              className="inline-flex text-xs font-medium text-amber-300 hover:text-amber-200 underline underline-offset-4"
-            >
-              Baca profil lengkap →
-            </Link>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              {
-                title: "Profesional",
-                desc: "Standar kerja yang terukur, tepat waktu, dan akuntabel."
-              },
-              {
-                title: "Kreatif",
-                desc: "Konsep dan aktivasi yang relevan dengan karakter destinasi."
-              },
-              {
-                title: "Inovatif",
-                desc: "Terbuka pada ide baru dan kolaborasi lintas sektor."
-              },
-              {
-                title: "Terdepan",
-                desc: "Berorientasi jangka panjang dan keberlanjutan."
-              }
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="p-4 rounded-xl border border-slate-800 bg-slate-900/70"
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold">
+            Insight Terbaru dari Blog
+          </h2>
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex text-xs font-medium text-amber-300 hover:text-amber-200 underline underline-offset-4"
+          >
+            Lihat semua artikel →
+          </Link>
+        </div>
+        {posts.length === 0 ? (
+          <p className="text-sm text-slate-400">
+            Belum ada artikel. Tambahkan postingan di <code>data/posts.js</code>.
+          </p>
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2">
+            {posts.map((post) => (
+              <article
+                key={post.slug}
+                className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900/90 transition-colors"
               >
-                <h3 className="font-semibold mb-1 text-sm">{item.title}</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {item.desc}
+                <p className="text-[11px] text-slate-400 mb-1">
+                  {post.category && `${post.category} • `}
+                  {formatDate(post.date)}
                 </p>
-              </div>
+                <h3 className="font-semibold text-base mb-2">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="hover:text-amber-300"
+                  >
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="text-sm text-slate-300 line-clamp-3 mb-3">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center justify-between text-xs text-slate-400">
+                  <span>{post.author && `Oleh ${post.author}`}</span>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-amber-300 hover:text-amber-200"
+                  >
+                    Baca selengkapnya →
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA kontak */}
-      <section className="border-y border-slate-800 bg-slate-900/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h2 className="text-lg sm:text-xl font-semibold mb-1">
-              Siap mendiskusikan rencana event atau proyek Anda?
-            </h2>
-            <p className="text-sm text-slate-300">
-              Kami terbuka untuk kerja sama dengan pemerintah, korporasi,
-              komunitas, maupun pelaku usaha lokal.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="https://wa.me/62812XXXXXXX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              Hubungi via WhatsApp
-            </a>
-            <Link href="/kontak" className="btn-secondary">
-              Lihat detail kontak
-            </Link>
-          </div>
+        )}
+        <div className="mt-4 sm:hidden">
+          <Link
+            href="/blog"
+            className="text-xs font-medium text-amber-300 hover:text-amber-200 underline underline-offset-4"
+          >
+            Lihat semua artikel →
+          </Link>
         </div>
       </section>
     </Layout>

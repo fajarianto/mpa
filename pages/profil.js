@@ -1,12 +1,19 @@
-// pages/profil.js
 import Layout from "../components/Layout";
+import Link from "next/link";
+import { getAllPosts } from "../data/posts";
 
-export default function ProfilPage() {
+export async function getStaticProps() {
+  const posts = getAllPosts().slice(0, 3);
+  return {
+    props: { posts }
+  };
+}
+
+export default function ProfilPage({ posts }) {
   return (
     <Layout
-      path="/profil"
       title="Profil Perusahaan"
-      description="Profil lengkap PT. Mandala Putra Anugerah (MPA Corp) – perusahaan pariwisata, hiburan, dan pembangunan berkelanjutan yang berbasis di Kota Batu, Jawa Timur."
+      description="Profil PT. Mandala Putra Anugerah (MPA Corp): perusahaan event organizer, pariwisata, hiburan, dan pembangunan berkelanjutan berbasis di Kota Batu, Jawa Timur."
     >
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <h1 className="text-2xl sm:text-3xl font-semibold mb-3">
@@ -52,6 +59,55 @@ export default function ProfilPage() {
                 menguntungkan.
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Blog Section */}
+        <div className="mt-12 pt-10 border-t border-slate-800">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">
+            Artikel Terbaru dari Blog
+          </h2>
+
+          {!posts || posts.length === 0 ? (
+            <p className="text-slate-400 text-sm">
+              Belum ada artikel yang dipublikasikan.
+            </p>
+          ) : (
+            <div className="grid gap-5 md:grid-cols-3">
+              {posts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-900 transition"
+                >
+                  <h3 className="font-semibold text-sm mb-2">
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="hover:text-amber-300"
+                    >
+                      {post.title}
+                    </Link>
+                  </h3>
+                  <p className="text-xs text-slate-400 line-clamp-3 mb-3">
+                    {post.excerpt}
+                  </p>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-xs font-medium text-amber-300 hover:text-amber-200"
+                  >
+                    Baca selengkapnya →
+                  </Link>
+                </article>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-4">
+            <Link
+              href="/blog"
+              className="text-xs underline underline-offset-4 text-amber-300 hover:text-amber-200"
+            >
+              Lihat semua artikel →
+            </Link>
           </div>
         </div>
       </section>

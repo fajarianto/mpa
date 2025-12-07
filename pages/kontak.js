@@ -1,12 +1,10 @@
-// pages/kontak.js
 import Layout from "../components/Layout";
 
 export default function KontakPage() {
   return (
     <Layout
-      path="/kontak"
       title="Kontak"
-      description="Informasi kontak PT. Mandala Putra Anugerah (MPA Corp) untuk konsultasi event, pariwisata, dan proyek pembangunan di Kota Batu, Jawa Timur."
+      description="Hubungi PT. Mandala Putra Anugerah (MPA Corp) untuk konsultasi event, pariwisata, dan proyek pembangunan di Kota Batu, Jawa Timur."
     >
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <h1 className="text-2xl sm:text-3xl font-semibold mb-4">

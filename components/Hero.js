@@ -1,4 +1,3 @@
-// components/Hero.js
 import Link from "next/link";
 
 export default function Hero() {
@@ -54,7 +53,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Kolom kanan */}
         <div className="space-y-4 text-sm">
           <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
             <p className="text-xs font-medium text-amber-300 mb-1">
