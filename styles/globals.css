@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global reset ringan */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Fokus aksesibilitas */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #fbbf24; /* amber-300 */
+  outline-offset: 2px;
+}
+
+/* Navbar link */
+.nav-link {
+  @apply relative text-xs sm:text-sm text-slate-100;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #fbbf24, #f97316);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover {
+  @apply text-amber-300;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.12em] uppercase border transition ease-out duration-150;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #fbbf24, #f97316);
+  color: #020617;
+  border-color: #f59e0b;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  @apply bg-slate-900/70 text-slate-100 border-slate-800;
+}
+
+.btn-secondary:hover {
+  @apply bg-slate-900/95;
+}
+
+/* Inputs & textarea */
+.input {
+  @apply w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-900/80 text-slate-100 text-xs sm:text-sm;
+}
+
+.input::placeholder {
+  @apply text-slate-500;
+}
+
+.input:focus {
+  @apply border-amber-300 outline-none;
+}
